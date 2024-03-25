@@ -25,7 +25,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 const mongoConnect = (cb) =>{
    MongoClient.connect(
-      'mongodb+srv://Bhushan:Bhushan%40123@cluster0.hhyq8d5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+      'mongodb+srv://Bhushan:Bhushan%40123@cluster0.hhyq8d5.mongodb.net/Shopping-Portal?retryWrites=true&w=majority&appName=Cluster0'
    ).then(client =>{
     console.log('Connect!');
     _db = client.db();
