@@ -1,5 +1,11 @@
 const bcrypt = require('bcryptjs')
 const User = require('../models/user');
+const nodemailer = require('nodemailer')
+const MailtrapClient = require("mailtrap").MailtrapClient; 
+
+const TOKEN = "22e17a8d9a53fbce1375e67233314632";
+const client = new MailtrapClient({ token: TOKEN });
+const sender = { name: "Mailtrap Test", email:'mailtrap@demomailtrap.com' };
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
@@ -80,6 +86,14 @@ exports.postSignup = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/login');
+        return client .send({
+        from: sender,
+        to: [{ email: email }],
+        subject: "Hello from Mailtrap!",
+        text: "Welcome to Mailtrap Sending!",
+      })
+      }).catch((err)=>{
+        console.log("err",err);
       });
     })
     .catch(err => {
